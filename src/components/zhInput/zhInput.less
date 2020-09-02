@@ -1,0 +1,110 @@
+.zhInputCtn{
+  height: 32px;
+  line-height: 32px;
+  display: inline-flex;
+  font-size: 14px;
+  position: relative;
+  width: 100%;
+  .zhInputPrepend{
+    height: 32px;
+    padding: 0 12px;
+    background: rgba(248,248,248,1);
+    border:1px solid rgba(0,0,0,0.15);
+    border-right: 0;
+    box-sizing: border-box;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    color: rgba(0, 0, 0,0.65);
+  }
+  .zhInputAppend{
+    height: 32px;
+    padding: 0 12px;
+    background: rgba(248,248,248,1);
+    border:1px solid rgba(0,0,0,0.15);
+    border-left: 0;
+    box-sizing: border-box;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    color: rgba(0, 0, 0,0.65);
+  }
+  .zhInputBox{
+    height: 32px;
+    flex:1;
+    &:hover{
+      .zhInput{
+        border-color: #c0c4cc;
+      }
+    }
+    .zhInput{
+      height: 100%;
+      box-sizing: border-box;
+      font-size: inherit;    
+      padding: 0px 15px;
+      border: 1px solid rgba(0,0,0,0.15);
+      border-radius: 4px;
+      width: 100%;
+      -webkit-appearance: none;
+      &.hasAppend{
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        color: rgba(0,0,0,.85)!important;
+      }
+      &.hasPrepend{
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+      }
+      &:focus{
+        outline: none;
+        border-color: #1A95FF;
+      }
+      &:disabled{
+        background-color: #f5f7fa;
+        border-color: #e4e7ed;
+        color: #c0c4cc;
+        cursor: not-allowed;
+      }
+      &.typeError{
+        border-color: #F56C6C;
+      }
+    }
+    .zhInputClose{
+      cursor: pointer;
+      position: absolute;
+      top:0;
+      bottom: 0;
+      right: 12px;
+      font-size: 14px;
+      margin: auto 0;
+      width: 14px;
+      height: 14px;
+      text-align: center;
+      line-height: 14px;
+      border-radius: 50%;
+      &:hover{
+        color: #fff;
+        background: #1A95FF;
+      }
+    }
+  }
+  .zhErrorMsg{
+    font-size: 12px;
+    position: absolute;
+    color: #F56C6C;
+    white-space: nowrap;
+    font-weight: bold;
+    vertical-align: text-top;
+    &.right{
+      left: 100%;
+      padding-left: 5px;
+    }
+    &.bottom{
+      line-height: 18px;
+      bottom:-18px;
+    }
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}

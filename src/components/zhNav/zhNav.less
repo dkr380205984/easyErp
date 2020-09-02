@@ -1,0 +1,175 @@
+@font-face {
+  font-family: 'zhkj_icon';  /* project id 1928040 */
+  src: url('//at.alicdn.com/t/font_1928040_b176vh51kug.eot');
+  src: url('//at.alicdn.com/t/font_1928040_b176vh51kug.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1928040_b176vh51kug.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1928040_b176vh51kug.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1928040_b176vh51kug.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1928040_b176vh51kug.svg#font_family') format('svg');
+}
+.zhNavCtn{
+  height: 100%;
+  background:rgba(46,57,79,1);
+  color:rgba(255,255,255,0.65);
+  .img{
+    width:21px;
+    height: 21px;
+    vertical-align: -5px;
+    margin-right: 5px;
+  }
+  .el-menu--horizontal>.el-submenu .el-submenu__title{
+    line-height: 64px;
+  }
+  .zhNav{
+    height: 100%;
+    display: inline-block;
+    position: relative;
+    .navTitle{
+      position: relative;
+      display: inline-flex;
+      padding:0 18px;
+      height: 100%;
+      vertical-align: middle;
+      align-items: center;
+      font-size: 16px;
+      .name{
+        .img{
+          width:21px;
+          height: 21px;
+          vertical-align: -5px;
+          margin-right: 5px;
+        }
+      }
+      .iconTop{
+        margin-top:3px;
+        margin-left: 5px;
+        vertical-align: middle;
+        transition: 0.2s linear;
+      }
+    }
+    .navChildren{
+      position: absolute;
+      background: rgba(46,57,79,1);
+      transition: 0.25s ease-in;
+      max-height: 0;
+      overflow-y: hidden;
+      box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+      border-top:2px solid #fff;
+      .navList{
+        color:rgba(255,255,255,0.65);
+        height: 46px;
+        line-height: 46px;
+        padding:0 18px;
+        width: auto;
+        white-space: nowrap;
+        min-width: 7em;
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        &:hover{
+          color:rgba(255,255,255,1);
+          background:#006bac;
+          .iconRight{
+            transform: rotate(180deg);
+          }
+          .navGrandSon{
+            display: block;
+          }
+        }
+        &:nth-child(1){
+          margin-top: 6px;
+        }
+        &:nth-last-child(1){
+          margin-bottom: 6px;
+        }
+        .iconRight{
+          transition: 0.2s linear;
+          line-height: 46px;
+          margin-left: 15px;
+          vertical-align: middle;
+        }
+        .name{
+          .img{
+            width:21px;
+            height: 21px;
+            margin-right: 5px;
+            vertical-align: middle;
+          }
+        }
+      }
+      .navGrandSon{
+        position: absolute;
+        border-left: 2px solid #fff;
+        left: 100%;
+        display: none;
+        border-radius: 2px;
+        box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+        background: rgba(46,57,79,1);
+      }
+    }
+    &:hover{
+      color:rgba(255,255,255,1);
+      cursor: pointer;
+      .navChildren{
+        // 利用transition完成max-height过度,利用animation延迟触发overflow
+        max-height: 450px;
+        animation: show 0.1s 1 forwards;
+        animation-delay:0.3s;
+        @keyframes show {
+          0% {
+            overflow: hidden;
+          }
+          100%{
+            overflow: inherit;
+          }
+        }
+      }
+      .iconTop{
+        transform: rotate(180deg);
+      }
+    }
+    &.active{
+      &::after{
+        content: '';
+        height: 2px;
+        position: absolute;
+        background: #1a95ff;
+        bottom: -2px;
+        left:10px;
+        right: 10px;
+      }
+    }
+  }
+}
+.iconFont{
+  font-family: 'zhkj_icon';
+  // color: #FFF;
+  font-size: 20px;
+  margin-right: 8px;
+  &.product{
+    &::after{
+      content: '\e617';
+    }
+  }
+  &.sample{
+    &::after{
+      content: '\e615';
+    }
+  }
+  &.price{
+    &::after{
+      content: '\e614';
+    }
+  }
+  &.financial{
+    &::after{
+      content: '\e612';
+    }
+  }
+  &.other{
+    &::after{
+      content: '\e618';
+    }
+  }
+}

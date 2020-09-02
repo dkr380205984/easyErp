@@ -1,0 +1,139 @@
+#login{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #F0F2F5;
+  position: relative;
+  .rightTop{
+    position: absolute;
+    right: -186px;
+    top: -186px;
+  }
+  .leftBottom{
+    position: absolute;
+    left: -186px;
+    bottom: -186px;
+  }
+  .atCenter{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+  }
+  .main{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 430px;
+    height: 474px;
+    background:rgba(248,248,248,1);
+    box-shadow:0px 3px 6px rgba(0,0,0,0.16);
+    border-radius:8px;
+    .title{
+      margin: 30px;
+      height: 45px;
+      text-align: center;
+      img{
+        height: 100%;
+      }
+    }
+    .btnList{
+      display: flex;
+      justify-content: space-evenly;
+      .btn{
+        color: rgba(0,0,0,0.65);;
+        cursor: pointer;
+        line-height: 32px;
+        font-size: 16px;
+        text-align: center;
+        width: 136px;
+        &.active{
+          color: #1a95ff;
+          border-bottom: 2px solid;
+        }
+      }
+    }
+    .userName,.password{
+      padding: 0 33px;
+      margin: 33px 0;
+      height: 40px;
+      .zhInputCtn{
+        height: 40px;
+      }
+    }
+    .psdOp{
+      padding: 0 33px;
+      height: 30px;
+      display: flex;
+      justify-content: space-between;
+      .fogotPsd{
+        font-size:12px;
+        text-decoration: underline;
+        color: #888888;
+        &:hover{
+          color:#10AEF5;
+          cursor: pointer;
+        }
+      }
+    }
+    .subBtn{
+      margin: 20px 33px;
+      line-height: 40px;
+      font-size: 18px;
+      text-align: center;
+      color: #fff;
+      background: #1A95FF;
+      border-radius: 2px;
+      &:hover{
+        background: #10AEF5;
+        cursor: pointer;
+      }
+    }
+  }
+  .bottomInfo{
+    color: rgba(255,255,255,0.7);
+    font-size: 12px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background: #2E394F;
+    margin: auto;
+    .line{
+      line-height: 24px;
+      width: 400px;
+      margin: auto;
+      a {
+        text-decoration: none;
+        &:link{
+          text-decoration: none;
+          color: rgba(255,255,255,0.7);
+        }
+        &:visited{
+          text-decoration: none;
+          color: rgba(255,255,255,0.7);
+        }
+        &:hover{
+          text-decoration: none;
+          color: rgba(255,255,255,0.7);
+        }
+        &:active{
+          text-decoration: none;
+          color: rgba(255,255,255,0.7);
+        }
+        &:focus{
+          text-decoration: none;
+          color: rgba(255,255,255,0.7);
+        }
+        &:hover{
+          color: #1A95FF;
+        }
+      }
+    }
+  }
+}

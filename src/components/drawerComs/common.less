@@ -1,0 +1,154 @@
+@fontNormal:14px;
+@fontBig:16px;
+@font25:rgba(0,0,0,.25);
+@font45:rgba(0,0,0,.45);
+@font65:rgba(0,0,0,.65);
+@font85:rgba(0,0,0,.85);
+@borderColor:rgba(0,0,0,0.09);
+@blue:#1A95FF;
+@red:#F5222D;
+@orange:#E6A23C;
+@green:#01B48C;
+.innerDrawer{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: @fontNormal;
+  box-sizing: border-box;
+  color: @font65;
+  font-weight: 400;
+  .titleCtn{
+    height: 64px;
+    display: flex;
+    align-items: center;
+    font-size: @fontBig;
+    padding: 0 24px;
+    justify-content: space-between;
+    border-bottom: 1px solid @borderColor;
+    .title{
+      color: @font85;
+      font-weight: 500;
+    }
+    .close_icon{
+      color: @font45;
+      padding: 8px;
+      transition: all 0.1s linear;
+      border-radius: 50%;
+      cursor: pointer;
+      &:hover{
+        background-color: @red;
+        color: #FFF;
+      }
+    }
+  }
+  .bodyCtn{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 24px;
+    overflow: auto;
+    .itemCtn{
+      display: flex;
+      flex-direction: column;
+      .title{
+        padding: 24px 0 16px;
+        .text{
+          color: @font85;
+          font-size: @fontBig;
+          font-weight: 500;
+        }
+      }
+      .rowCtn{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 24px;
+        .label{
+          margin-bottom: 8px;
+        }
+        .info{
+          width: 100%;
+          display: flex;
+          align-items: center;
+          min-height: 32px;
+          position: relative;
+          padding-right: 32px;
+          box-sizing: border-box;
+          margin-bottom: 16px;
+          .inputs{
+            flex: 1;
+            margin-right: 8px;
+            &:last-of-type{
+              margin: 0;
+            }
+          }
+          .deleteBtn{
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 32px;
+            transform: translateY(-50%);
+            text-align: center;
+            transition: all 0.1s linear;
+            cursor: pointer;
+            font-size: @fontBig;
+            &:hover{
+              color: @red;
+            }
+          }
+          &:last-child{
+            margin-bottom: 0;
+          }
+          .addBtn{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            border: 1px dashed @font25;
+            height: 32px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            cursor: pointer;
+            &::before{
+              content: '+';
+              font-size: 20px;
+              margin-right: 8px;
+            }
+            &:hover{
+              border-color: @blue;
+              color: @blue;
+            }
+          }
+        }
+      }
+    }
+  }
+  .footCtn{
+    height: 64px;   
+    padding: 0 24px; 
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-top: 1px solid @borderColor;
+  }
+  .btn{
+    padding: 0 1em;
+    border: 1px solid @borderColor;
+    height: 32px;
+    text-align: center;
+    line-height: 32px;
+    box-sizing: border-box;
+    margin-left: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    &.btnBlue{
+      border: none;
+      background-color: @blue;
+      color: #FFF;
+    }
+    &:first-child{
+      margin-left: 0;
+    }
+  }
+}

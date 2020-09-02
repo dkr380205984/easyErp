@@ -1,0 +1,139 @@
+@import '~@/assets/less/common.less';
+.zh_img_list {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  height: 45px;
+  width: 120px;
+  &:hover {
+    .hover_bg {
+      opacity: 1;
+    }
+  }
+  .hover_bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    height: inherit;
+    background: rgba(0,0,0,0.65);
+    transition: opacity 0.1s linear;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .handle_btn_context{
+      .handle_btn_item{
+        display: flex;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        &:hover{
+          color: #1A95FF;
+          font-weight: bold;
+        }
+        &.left{
+          left: -25px;
+        }
+        &.right{
+          right: -25px;
+        }
+      }
+    }
+    .index_info{
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.2em;
+    }
+  }
+  .img {
+    max-width: 80px;
+    max-height: 100%;
+  }
+  .zh_img_screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(64,64,64,0.6);
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    user-select:none;
+    .close{
+      font-size: 40px;
+      color: #FFF;
+      margin-bottom: 60px;
+      &:hover{
+        color: @blue;
+      }
+    }
+    .zh_img_box{
+      height: 550px;
+      width: 1000px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .handle_btn_item {
+        display: flex;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: @blue;
+        color: #FFF;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        font-size: 32px;
+        &.left{
+          left: 0;
+        }
+        &.right{
+          right: 0;
+        }
+      }
+      .screen_img {
+        max-width: 900px;
+        max-height: 550px;
+        // height: 100%;
+      }
+      .handle_indicator {
+        position: absolute;
+        bottom: 0;
+        transform: translateY(20px);
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: auto;
+        height: 5px;
+        display: flex;
+        &>li{
+          width: 40px;
+          height: inherit;
+          margin: 0 10px;
+          border-radius: 2px;
+          background: rgba(0,0,0,0.15);
+          &.active {
+            background: @blue;
+          }
+        }
+      }
+    }
+  }
+}
