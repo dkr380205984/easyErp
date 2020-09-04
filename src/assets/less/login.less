@@ -2,25 +2,8 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: #F0F2F5;
+  background:rgba(237,239,244,0.3);
   position: relative;
-  .rightTop{
-    position: absolute;
-    right: -186px;
-    top: -186px;
-  }
-  .leftBottom{
-    position: absolute;
-    left: -186px;
-    bottom: -186px;
-  }
-  .atCenter{
-    position: absolute;
-    width: 100%;
-    top: 0;
-    bottom: 0;
-    margin: auto 0;
-  }
   .main{
     position: absolute;
     left: 0;
@@ -28,70 +11,77 @@
     top: 0;
     bottom: 0;
     margin: auto;
-    width: 430px;
-    height: 474px;
-    background:rgba(248,248,248,1);
-    box-shadow:0px 3px 6px rgba(0,0,0,0.16);
-    border-radius:8px;
-    .title{
-      margin: 30px;
-      height: 45px;
-      text-align: center;
-      img{
-        height: 100%;
+    display: flex;
+    width: 1366px;
+    height: 1024px;
+    .left{
+      padding: 200px 100px;
+      box-sizing: border-box;
+      width: 50%;
+      .title{
+        height: 180px;
+        background-image: url('../image/login/织为云 订单管理系统.png');
+        background-repeat: no-repeat;
+        background-position: left center ;
       }
-    }
-    .btnList{
-      display: flex;
-      justify-content: space-evenly;
-      .btn{
-        color: rgba(0,0,0,0.65);;
-        cursor: pointer;
-        line-height: 32px;
-        font-size: 16px;
+      .inputCtn{
+        height: 48px;
+        border-radius: 24px;
+        background: #EDEFF4;
+        margin-top:48px;
+        padding: 0 30px;
+        display: flex;
+        align-items: center;
+        .icon{
+          border-right: 1px solid #D8D8D8;
+          font-size: 26px;
+          color: #467CFD;
+          padding-right: 20px;
+        }
+        .input{
+          border:0;
+          outline: 0;
+          flex:1;
+          background: rgba(0,0,0,0);
+          font-size: 16px;
+          margin-left: 20px;
+        }
+      }
+      .psdOp{
+        padding: 0 12px;
+        height: 48px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 12px;
+        .fogotPsd{
+          font-size:16px;
+          text-decoration: underline;
+          color: #888888;
+          &:hover{
+            color:#10AEF5;
+            cursor: pointer;
+          }
+        }
+      }
+      .subBtn{
+        margin: 20px 0;
+        line-height: 48px;
+        font-size: 18px;
         text-align: center;
-        width: 136px;
-        &.active{
-          color: #1a95ff;
-          border-bottom: 2px solid;
-        }
-      }
-    }
-    .userName,.password{
-      padding: 0 33px;
-      margin: 33px 0;
-      height: 40px;
-      .zhInputCtn{
-        height: 40px;
-      }
-    }
-    .psdOp{
-      padding: 0 33px;
-      height: 30px;
-      display: flex;
-      justify-content: space-between;
-      .fogotPsd{
-        font-size:12px;
-        text-decoration: underline;
-        color: #888888;
-        &:hover{
-          color:#10AEF5;
-          cursor: pointer;
-        }
-      }
-    }
-    .subBtn{
-      margin: 20px 33px;
-      line-height: 40px;
-      font-size: 18px;
-      text-align: center;
-      color: #fff;
-      background: #1A95FF;
-      border-radius: 2px;
-      &:hover{
-        background: #10AEF5;
+        color: #fff;
+        background: #597EF7;
+        box-shadow: 0px 2px 8px 0px rgba(89, 126, 247, 0.7);
+        border-radius: 30px;
         cursor: pointer;
       }
+    
+    }
+    .right{
+      flex: 1;
+      background-image: url('../image/login/订单管理系统登录页图.png');
+      background-repeat: no-repeat;
+      background-position: center center ;
     }
   }
   .bottomInfo{

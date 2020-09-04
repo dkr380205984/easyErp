@@ -57,6 +57,9 @@ const permissions = [{
 }, {
   module: '进仓运输管理',
   id: 19
+}, {
+  module: '成品加工',
+  id: 20
 }]
 const moneyArr = [{
   name: '元',
@@ -78,33 +81,257 @@ const countries = '中国、蒙古、朝鲜、韩国、日本、菲律宾、越�
 const companyType = [
   {
     value: 1,
-    name: '订单公司'
+    label: '常用公司',
+    type: '订单公司'
   }, {
     value: 2,
-    name: '原料纱线单位'
+    label: '其他公司',
+    type: '订单公司'
   }, {
     value: 3,
-    name: '物料加工单位'
+    label: '常用单位',
+    type: '原料纱线单位'
   }, {
     value: 4,
-    name: '生产织造单位'
+    label: '其他单位',
+    type: '原料纱线单位'
   }, {
     value: 5,
-    name: '半成品加工单位'
+    label: '常用单位',
+    type: '装饰辅料单位'
+  }, {
+    value: 6,
+    label: '其他单位',
+    type: '装饰辅料单位'
   }, {
     value: 7,
-    name: '包装辅料单位'
+    label: '常用单位',
+    type: '包装辅料单位'
   }, {
     value: 8,
-    name: '运输单位'
+    label: '其他单位',
+    type: '包装辅料单位'
+  }, {
+    value: 9,
+    label: '纱线染色单位',
+    type: '物料加工单位'
   }, {
     value: 10,
-    name: '装饰辅料单位'
+    label: '纱线倒纱单位',
+    type: '物料加工单位'
   }, {
     value: 11,
-    name: '销售客户'
+    label: '并金银丝单位',
+    type: '物料加工单位'
+  }, {
+    value: 12,
+    label: '毛料切割单位',
+    type: '物料加工单位'
+  }, {
+    value: 13,
+    label: '梭织织造单位',
+    type: '生产织造单位'
+  }, {
+    value: 14,
+    label: '针织织造单位',
+    type: '生产织造单位'
+  }, {
+    value: 15,
+    label: '拉毛、刺毛、轧光单位',
+    type: '半成品加工单位'
+  }, {
+    value: 16,
+    label: '水洗、纱洗、烘干单位',
+    type: '半成品加工单位'
+  }, {
+    value: 17,
+    label: '抽顶、剪球、吊球单位',
+    type: '半成品加工单位'
+  }, {
+    value: 18,
+    label: '捻须、穿线、打结单位',
+    type: '半成品加工单位'
+  }, {
+    value: 19,
+    label: '压皱、整烫单位',
+    type: '半成品加工单位'
+  }, {
+    value: 20,
+    label: '车缝、开片单位',
+    type: '半成品加工单位'
+  }, {
+    value: 21,
+    label: '绣花、印花单位',
+    type: '半成品加工单位'
+  }, {
+    value: 22,
+    label: '钉扣、烫钻单位',
+    type: '半成品加工单位'
+  }, {
+    value: 23,
+    label: '接指、麻缝单位',
+    type: '半成品加工单位'
+  }, {
+    value: 24,
+    label: '套口、套缝单位',
+    type: '半成品加工单位'
+  }, {
+    value: 25,
+    label: '成品染色单位',
+    type: '半成品加工单位'
+  }, {
+    value: 26,
+    label: '毛料切割单位',
+    type: '半成品加工单位'
+  }, {
+    value: 27,
+    label: '手工单位',
+    type: '半成品加工单位'
+  }, {
+    value: 28,
+    label: '其它单位',
+    type: '半成品加工单位'
+  }, {
+    value: 29,
+    label: '检验单位',
+    type: '成品加工单位'
+  }, {
+    value: 30,
+    label: '开片单位',
+    type: '成品加工单位'
+  }, {
+    value: 31,
+    label: '整烫单位',
+    type: '成品加工单位'
+  }, {
+    value: 32,
+    label: '车标单位',
+    type: '成品加工单位'
+  }, {
+    value: 33,
+    label: '包装单位',
+    type: '成品加工单位'
+  }, {
+    value: 34,
+    label: '其它单位',
+    type: '成品加工单位'
+  }, {
+    value: 35,
+    label: '常用单位',
+    type: '运输单位'
+  }, {
+    value: 36,
+    label: '其他单位',
+    type: '运输单位'
+  }, {
+    value: 37,
+    label: '常用单位',
+    type: '销售出库单位'
+  }, {
+    value: 38,
+    label: '其他单位',
+    type: '销售出库单位'
   }
 ]
+/**
+ *
+  {
+    value: 1,
+    name: '订单公司'
+  },
+   {
+    value: 2,
+    name: '原料纱线单位'
+  },
+   {
+    value: 3,
+    name: '物料加工单位'
+  },
+   {
+    value: 4,
+    name: '生产织造单位'
+  },
+   {
+    value: 5,
+    name: '半成品加工单位'
+  },
+   {
+    value: 7,
+    name: '包装辅料单位'
+  },
+   {
+    value: 8,
+    name: '运输单位'
+  },
+   {
+    value: 10,
+    name: '装饰辅料单位'
+  },
+   {
+    value: 11,
+    name: '销售客户'
+  },
+   {
+    value: 12,
+    name: '拉毛、刺毛、轧光单位'
+  },
+   {
+    value: 13,
+    name: '水洗、纱洗、烘干单位'
+  },
+   {
+    value: 14,
+    name: '抽顶、剪球、吊球单位'
+  },
+   {
+    value: 15,
+    name: '捻须、穿线、打结单位'
+  },
+   {
+    value: 16,
+    name: '压皱、整烫单位'
+  },
+   {
+    value: 17,
+    name: '车缝、开片单位'
+  },
+   {
+    value: 18,
+    name: '绣花、印花单位'
+  },
+   {
+    value: 20,
+    name: '钉扣、烫钻单位'
+  },
+   {
+    value: 21,
+    name: '接指、麻缝单位'
+  },
+   {
+    value: 22,
+    name: '套口、套缝单位'
+  },
+   {
+    value: 23,
+    name: '成品染色单位'
+  },
+   {
+    value: 24,
+    name: '毛料切割单位'
+  },
+   {
+    value: 25,
+    name: '手工单位'
+  },
+   {
+    value: 26,
+    name: '其它单位'
+  },
+  {
+    value: 27,
+    name: '成品加工单位'
+  }
+ */
 export {
   companyType,
   moneyArr,

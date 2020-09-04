@@ -297,6 +297,9 @@ const plugin = {
   },
   // 123456转123，456
   formatNum (num) {
+    if (num === null || num === undefined) {
+      return 'NaN'
+    }
     var str = num.toString()
     var reg = str.indexOf('.') > -1 ? /(\d)(?=(\d{3})+\.)/g : /(\d)(?=(?:\d{3})+$)/g
     return str.replace(reg, '$1,')
@@ -350,13 +353,47 @@ const plugin = {
     } else {
       return [...new Set(arr)]
     }
+  },
+  // 注意！这个方法会改变传进来的findArr数组
+  // findArr 需要查找的数组 比如 [{name:'爸爸',money:'1000'},{{name:'爸爸',money:'2000'},{name:'爷爷',money:'1000'}]
+  // compare 需要对比的对象 比如 {name:'爸爸',money:'2000'}
+  // findWhich 需要比对哪些数据相同 比如 ['name']
+  // addWhich 相同的数据需要相加的数据 比如 ['money']
+  // 上面的例子是指findArr数组里找是否有跟compare , name相同的数据，如果有，则finded的money相加，如果没有，findArr会push compare这个对象进去，这会改变findArr,很多情况下，findArr可以是一个空数组
+  commonFind (findArr, compare, findWhich, addWhich) {
+    if (typeof (findWhich) === 'string') {
+      return findArr.find((itemFind) => {
+        return itemFind[findWhich] === compare[itemFind]
+      })
+    } else if (findWhich.constructor === Array) {
+      let finded = findArr.find((itemFind) => {
+        let flag = true
+        findWhich.forEach((item) => {
+          if (compare[item] !== itemFind[item]) {
+            flag = false
+          }
+        })
+        return flag
+      })
+      if (!finded) {
+        findArr.push(compare)
+      } else {
+        if (addWhich.constructor === Array) {
+          addWhich.forEach((item) => {
+            finded[item] += Number(compare[item])
+          })
+        }
+      }
+    } else {
+      console.error('第三个参数必须为字符串或数组格式')
+    }
   }
 }
 const submitLock = () => {
   let lock = true
-  return function (messageStr) { // 采用闭包保存lock状态
+  return function (messageStr = '请勿频繁点击') { // 采用闭包保存lock状态
     if (!lock) {
-      let str = messageStr || '请勿频繁点击'
+      let str = messageStr
       Message.Message.warning(str)
       return true
     }
@@ -366,8 +403,98 @@ const submitLock = () => {
     }, 1000)
   }
 }
+/**
+ * @param {Array} clientData      处理的client数据
+ * @param {Blob} hasFirstType     是否含有最外层type类型
+ * @param {Array,Number} type     过滤的type类型(优先级大于typeScope)
+ * @param {Array} typeScope       type取值范围(闭区间)(优先级大于returnAll)
+ * @param {Blob} returnAll        返回全部
+ */
+const getClientOptions = (clientData = [], companyType = [], { hasFirstType = false, type, typeScope, returnAll = true }) => {
+  if (plugin.getDataType(clientData) !== 'Array') {
+    throw new TypeError(`"clientData" is must be 'Array'`)
+  } else if (plugin.getDataType(companyType) !== 'Array') {
+    throw new TypeError(`"companyType" is must be 'Array'`)
+  }
+  // 过滤不符合条件的类型
+  let companyFilterType = companyType.filter(itemF => {
+    if (type) {
+      const typeStr = plugin.getDataType(type)
+      if (typeStr === 'Number') {
+        return +itemF.value === +type
+      } else if (typeStr === 'Array') {
+        return type.includes(+itemF.value)
+      } else {
+        throw new TypeError(`'type' is must be 'Number' or 'Array'`)
+      }
+    } else if (typeScope) {
+      const typeScopeStr = plugin.getDataType(typeScope)
+      if (typeScopeStr === 'Array') {
+        if (typeScope[0] && typeScope[1] && plugin.getDataType(typeScope[0]) === 'Number' && plugin.getDataType(typeScope[1]) === 'Number' && typeScope[1] > typeScope[0]) {
+          return +itemF.value >= typeScope[0] && +itemF.value <= typeScope[1]
+        } else if (typeScope[0] && plugin.getDataType(typeScope[0]) === 'Number') {
+          return +itemF.value >= typeScope[0]
+        } else {
+          throw new Error(`"typeScope" 参数错误`)
+        }
+      } else {
+        throw new TypeError(`'typeScope' is must be 'Array'`)
+      }
+    } else if (returnAll) {
+      return true
+    }
+  })
+  // 将单位塞入类型中
+  companyFilterType = companyFilterType.map(itemM => {
+    return {
+      value: itemM.value.toString(),
+      label: itemM.label,
+      type: itemM.type,
+      children: clientData.filter(itemF => itemF.type.includes(itemM.value)).map(itemM => {
+        return {
+          value: itemM.id.toString(),
+          label: itemM.name,
+          name_pinyin: itemM.name_pinyin.join(''),
+          contacts: itemM.contacts
+        }
+      })
+    }
+  })
+  if (hasFirstType) { // 是否需要最外层
+    companyFilterType = plugin.mergeData(companyFilterType, { mainRule: 'type/value', childrenName: 'children' }).map((itemM, indexM) => {
+      return {
+        value: indexM.toString(),
+        label: itemM.value,
+        children: itemM.children
+      }
+    })
+  }
+  return companyFilterType
+}
+const getZHTimeFormat = (time = false) => {
+  if (time === false) {
+    throw new TypeError(`The parameter 'time' is mandatory`)
+  } else if (!(new Date(time).getTime())) {
+    throw new TypeError(`the arguments for "time" is must be an 'Date'`)
+  }
+  const day = (new Date(plugin.getTime(time)).getTime() - new Date(plugin.getTime()).getTime()) / 1000 / 60 / 60 / 24
+  return `${plugin.getTime(time)}<br />剩余${day >= 0 ? day : 0}天`
+}
+const saveHistoryOrder = (orderInfo) => {
+  let curTime = new Date()
+  orderInfo.outOfDate = new Date(curTime.setHours(curTime.getHours() + 12))
+  let local = JSON.parse(window.localStorage.getItem('orderHistory')) || []
+  local = local.filter((item) => {
+    return (new Date(item.outOfDate)) > (new Date())
+  })
+  if (!local.find((itemFind) => itemFind.id === orderInfo.id)) {
+    local.push(orderInfo)
+    window.localStorage.setItem('orderHistory', JSON.stringify(local))
+  }
+}
 export default {
   install (Vue) {
+    Vue.prototype.$saveHistoryOrder = saveHistoryOrder
     Vue.prototype.$getDataType = plugin.getDataType
     Vue.prototype.$winReload = plugin.winReload
     Vue.prototype.$openUrl = plugin.openUrl
@@ -383,5 +510,8 @@ export default {
     Vue.prototype.$fuckSelect = plugin.fuckSelect
     Vue.prototype.$submitLock = submitLock()
     Vue.prototype.$unique = plugin.unique
+    Vue.prototype.$getClientOptions = getClientOptions
+    Vue.prototype.$getZHTimeFormat = getZHTimeFormat
+    Vue.prototype.$commonFind = plugin.commonFind
   }
 }

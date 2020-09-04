@@ -1153,6 +1153,157 @@
       }
     }
   }
+  // 侧边弹出框
+  .sidePopup{
+    z-index: 199;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(64,64,64,0.6);
+    .main{
+      position: absolute;
+      top:0;
+      bottom: 0;
+      right: 0;
+      width: 520px;
+      background: #fff;
+      animation: slideFromRight 0.3s;
+      .title{
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 16px;
+        font-weight: bold;
+        .text{
+          font-size: @fontBig;
+          color: @font85;
+        }
+        .el-icon-close{
+          color: #999999;
+          font-size: 18px;
+          cursor: pointer;
+        }
+      }
+      .content{
+        padding: 24px 24px 56px 24px;
+        border-top: 1px solid #E9E9E9;
+        border-bottom: 1px solid #E9E9E9;
+        height: calc(100% - 50px);
+        box-sizing: border-box;
+        .editCtn{
+          margin-bottom: 20px;
+          .label{
+            font-size: @fontMiddle;
+            color: @font65;
+            line-height: 36px;
+            .explanation{
+              margin-left: 5px;
+              color: @font25;
+            }
+          }
+          .inputCtn{
+            display: block;
+          }
+          .uploadImg{
+            .uploadBtn{
+              border: 1px solid #E9E9E9;
+              padding: 4px 12px;
+              border-radius: 4px;
+              font-size: @fontMiddle;
+              color: @font65;
+            }
+            .el-upload__tip{
+              color: @font45;
+              font-size: @fontSmall;
+            }
+          }
+          .hasBack{
+            background: #FAFAFA;
+            padding: 0px 12px 12px 12px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            .deleteIcon{
+              height: 32px;
+              text-align: right;
+              line-height: 32px;
+              .icon{
+                color: #ccc;
+                font-size: 22px;
+                cursor: pointer;
+                &:hover{
+                  color: @red;
+                }
+              }
+            }
+            .row{
+              display: flex;
+              margin-bottom: 12px;
+              &:nth-last-child(1){
+                margin-bottom: 0;
+              }
+              .col{
+                flex:1;
+                margin-right: 12px;
+                display: flex;
+                .input{
+                  margin-right: 8px;
+                  &:nth-last-child(1){
+                    margin-right: 0;
+                  }
+                }
+                &:nth-last-child(1){
+                  margin-right: 0px;
+                }
+              }
+            }
+          }
+        }
+        .addBtn{
+          display: flex;
+          margin-bottom: 12px;
+          .once{
+            flex: 1;
+            line-height: 32px;
+            border: 1px dashed #E9E9E9;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 4px;
+            color: @font65;
+            font-size: @fontMiddle;
+            letter-spacing: 1px;
+            margin-right: 12px;
+            &:nth-last-child(1){
+              margin-right: 0;
+            }
+            &:hover{
+              color: @blue;
+              border-color: @blue;
+            }
+          }
+        }
+      }
+      .oprCtn{
+        position: absolute;
+        bottom: 0;
+        height: 56px;
+        left: 0;
+        right: 0;
+        display: flex;
+        background: #fff;
+        align-items: center;
+        z-index: 1;
+        box-shadow: -6px 0px 16px -8px rgba(0, 0, 0, 0.08), -9px 0px 28px 0px rgba(0, 0, 0, 0.05), -12px 0px 48px 16px rgba(0, 0, 0, 0.03);;
+        justify-content: flex-end;
+        padding: 0 16px;
+        .btnCtn{
+          display: flex;
+        }
+      }
+    }
+  }
   //复杂表格2  
   .tableCtnLv2{
     width: 100%;
@@ -1306,6 +1457,11 @@
       width: calc(100% - 32px);
     }
   }
+}
+@keyframes slideFromRight {
+  0%   {right: -520px;}
+  50%  {right: -260px;}
+  100% {right: 0;}
 }
 .printHtml{
   color: #000;

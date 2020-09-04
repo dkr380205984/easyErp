@@ -19,23 +19,19 @@ const routes = [
   }, {
     path: '/index',
     name: 'index',
-    component: () => import("@/views/index.vue"),
+    component: () => import('@/views/index.vue'),
     children: [
       {
         path: '/homePage/homePage',
         name: '首页',
         component: () => import('@/views/homePage/homePage.vue')
       }, {
-        path: '/meau/meau',
-        name: '其他管理',
-        component: () => import('@/views/meau/meau.vue')
-      }, {
         path: '/order/orderList/:params',
         name: '订单列表',
         component: () => import('@/views/order/orderList.vue')
       }, {
-        path: '/order/orderCreate',
-        name: '订单添加',
+        path: '/order/orderCreate/:id',
+        name: '添加订单信息',
         component: () => import('@/views/order/orderCreate.vue')
       }
     ]
@@ -78,7 +74,7 @@ router.beforeEach((to, from, next) => {
     '工艺单添加': ['织为云', '产品列表', '工艺单添加'],
     '工艺单修改': ['织为云', '产品列表', '工艺单修改'],
     '工艺单详情': ['织为云', '产品列表', '工艺单详情'],
-    '订单添加': ['织为云', '订单添加'],
+    '添加订单信息': ['织为云', '添加订单信息'],
     '订单列表': ['织为云', '订单列表'],
     '订单发货列表': ['织为云', '订单发货列表'],
     '订单修改': ['织为云', '订单列表', '订单修改'],
@@ -160,4 +156,4 @@ router.beforeEach((to, from, next) => {
   store.commit('getRoute', routerTable[to.name])
   next()
 })
-export default router 
+export default router

@@ -16,8 +16,6 @@
           <i v-show="false"
             class="el-icon-data-line elIcon"
             @click="$router.push('/other/chartIndex')"></i>
-          <!-- <i class="el-icon-cpu elIcon"
-            @click="$router.push('/equipment')"></i> -->
           <div class="msgCtn">
             <el-badge :is-dot="total>0">
               <i class="el-icon-bell elIcon"
@@ -96,7 +94,6 @@
     </div>
     <div class="body">
       <div class="main">
-        <!-- keep-alive是Vue提供的一个抽象组件，用来对组件进行缓存  -->
         <router-view />
       </div>
     </div>
@@ -143,7 +140,7 @@
 </template>
 
 <script>
-import Pusher from 'pusher-js' // 全局方法
+// import Pusher from 'pusher-js' // 全局方法
 import { logout, notify, changeUserPasd } from '@/assets/js/api.js'
 export default {
   data () {
@@ -160,16 +157,10 @@ export default {
       lastPasd: '',
       newNavData: [
         {
-          name: '产品/订单',
+          name: '订单管理',
           id: 3,
           icon: 'product',
           url: '/order/orderList/page=1&&keyword=&&date=&&has_materialOrder=&&has_materialPlan=&&has_materialStock=&&has_weave=&&has_productInOut=&&has_inspection=&&has_boxing=&&group_id=&&company_id=&&state=&&searchOrderOrProduct='
-        },
-        {
-          name: '样品/样单',
-          id: 1,
-          icon: 'sample',
-          url: '/sample/sampleOrderList/page=1&&keyword=&&date=&&has_material=&&has_materialPlan=&&has_materialStock=&&has_weave=&&group_id=&&company_id=&&state=&&searchOrderOrProduct='
         },
         {
           name: '报价管理',
@@ -182,12 +173,6 @@ export default {
           id: 16,
           icon: 'financial',
           url: '/financialStatistics/orderStatistics/page=1&&keyword=&&date=&&group_id=&&company_id='
-        },
-        {
-          name: '其他管理',
-          id: null,
-          icon: 'other',
-          url: '/meau/meau'
         }
       ]
     }
@@ -344,23 +329,23 @@ export default {
   mounted () {
     // 页面刷新后触发
     this.$fuckSelect()
-    let vue = this
-    let pusher = new Pusher('117b8da677e144ce8212', {
-      cluster: 'ap1',
-      forceTLS: true
-    })
-    let channel = pusher.subscribe('my-channel-' + window.sessionStorage.getItem('user_id'))
-    channel.bind('my-event', function (data) {
-      let color = data.content.type === '普通' ? '#1a95ff' : data.content.type === '重要' ? '#E6A23C' : '#F5222D'
-      vue.$notify({
-        title: data.content.title,
-        dangerouslyUseHTMLString: true,
-        duration: 0,
-        message: '<span style="display: inline-block;background:' + color + ';color: #fff;border-radius: 4px;padding: 0px 6px;margin-right: 4px;">' + data.content.type + '</span>' + data.content.content + '<a style="color:#1a95ff" href=' + data.content.router_url + '>(点击查看)</a>'
-      })
-    })
-    this.getNotify()
-    this.$message.duration = 500
+    // let vue = this
+    // let pusher = new Pusher('117b8da677e144ce8212', {
+    //   cluster: 'ap1',
+    //   forceTLS: true
+    // })
+    // let channel = pusher.subscribe('my-channel-' + window.sessionStorage.getItem('user_id'))
+    // channel.bind('my-event', function (data) {
+    //   let color = data.content.type === '普通' ? '#1a95ff' : data.content.type === '重要' ? '#E6A23C' : '#F5222D'
+    //   vue.$notify({
+    //     title: data.content.title,
+    //     dangerouslyUseHTMLString: true,
+    //     duration: 0,
+    //     message: '<span style="display: inline-block;background:' + color + ';color: #fff;border-radius: 4px;padding: 0px 6px;margin-right: 4px;">' + data.content.type + '</span>' + data.content.content + '<a style="color:#1a95ff" href=' + data.content.router_url + '>(点击查看)</a>'
+    //   })
+    // })
+    // this.getNotify()
+    // this.$message.duration = 500
   }
 }
 </script>

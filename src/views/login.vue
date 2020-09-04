@@ -1,46 +1,34 @@
 <template>
   <div id="login">
-    <img class="rightTop"
-      :src="require('../assets/image/login/圆圈.png')" />
-    <img class="leftBottom"
-      :src="require('../assets/image/login/圆圈.png')" />
-    <img class="atCenter"
-      :src="require('../assets/image/login/线条.png')" />
     <div class="main">
-      <div class="title">
-        <img :src="require('../assets/image/login/标题.png')" />
+      <div class="left">
+        <div class="title"></div>
+        <div class="inputCtn">
+          <div class="icon">
+            <i class="el-icon-user"></i>
+          </div>
+          <input class="input"
+            placeholder="请输入帐号"
+            v-model="telephone" />
+        </div>
+        <div class="inputCtn">
+          <div class="icon">
+            <i class="el-icon-key"></i>
+          </div>
+          <input class="input"
+            type="password"
+            placeholder="请输入密码"
+            v-model="password" />
+        </div>
+        <div class="psdOp">
+          <el-checkbox v-model="remPsd">记住密码</el-checkbox>
+          <div class="fogotPsd"
+            @click="$router.push('/changePsd')">忘记密码？</div>
+        </div>
+        <div class="subBtn"
+          @click="goLogin">登录</div>
       </div>
-      <div class="btnList">
-        <div class="btn active">登陆</div>
-        <div class="btn"
-          @click="noOpr">注册</div>
-      </div>
-      <div class="userName">
-        <zh-input placeholder="请输入用户名"
-          v-model="telephone"
-          @keydown.enter="goLogin">
-          <template slot="prepend">
-            <i class="icons el-icon-user"></i>
-          </template>
-        </zh-input>
-      </div>
-      <div class="password">
-        <zh-input type="password"
-          placeholder="请输入密码"
-          v-model="password"
-          @keydown.enter="goLogin">
-          <template slot="prepend">
-            <i class="icons el-icon-lock"></i>
-          </template>
-        </zh-input>
-      </div>
-      <div class="psdOp">
-        <el-checkbox v-model="remPsd">记住密码</el-checkbox>
-        <div class="fogotPsd"
-          @click="$message.warning('暂未开放，请与管理员联系')">忘记密码？</div>
-      </div>
-      <div class="subBtn"
-        @click="goLogin">登录</div>
+      <div class="right"></div>
     </div>
     <!-- 备案信息 -->
     <div class="bottomInfo">
@@ -97,7 +85,7 @@ export default {
             if (_this.$route.query.nextUrl) {
               _this.$router.push(_this.$route.query.nextUrl)
             } else {
-              _this.$router.push('/homePage/homePage')
+              _this.$router.push('/order/orderCreate/1570')
             }
           })
         } else {
@@ -111,9 +99,7 @@ export default {
         message: '注册功能暂不开放'
       })
     }
-  },
-  // created () {
-  // }
+  }
 }
 </script>
 
@@ -135,6 +121,12 @@ export default {
     background: transparent;
     border: 0;
     line-height: 40px;
+  }
+  .el-checkbox {
+    font-size: 16px;
+    .el-checkbox__label {
+      font-size: 16px;
+    }
   }
 }
 </style>
