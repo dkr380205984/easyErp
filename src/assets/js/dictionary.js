@@ -89,19 +89,19 @@ const companyType = [
     type: '订单公司'
   }, {
     value: 3,
-    label: '常用单位',
+    label: '原料常用单位',
     type: '原料纱线单位'
   }, {
     value: 4,
-    label: '其他单位',
+    label: '原料其他单位',
     type: '原料纱线单位'
   }, {
     value: 5,
-    label: '常用单位',
+    label: '辅料常用单位',
     type: '装饰辅料单位'
   }, {
     value: 6,
-    label: '其他单位',
+    label: '辅料其他单位',
     type: '装饰辅料单位'
   }, {
     value: 7,

@@ -20,21 +20,39 @@ const routes = [
     path: '/index',
     name: 'index',
     component: () => import('@/views/index.vue'),
-    children: [
-      {
-        path: '/homePage/homePage',
-        name: '首页',
-        component: () => import('@/views/homePage/homePage.vue')
-      }, {
-        path: '/order/orderList/:params',
-        name: '订单列表',
-        component: () => import('@/views/order/orderList.vue')
-      }, {
-        path: '/order/orderCreate/:id',
-        name: '添加订单信息',
-        component: () => import('@/views/order/orderCreate.vue')
-      }
-    ]
+    children: [{
+      path: '/homePage/homePage',
+      name: '首页',
+      component: () => import('@/views/homePage/homePage.vue')
+    }, {
+      path: '/order/orderList/:params',
+      name: '订单列表',
+      component: () => import('@/views/order/orderList.vue')
+    }, {
+      path: '/order/orderCreate/:id',
+      name: '添加订单信息',
+      component: () => import('@/views/order/orderCreate.vue')
+    }, {
+      path: '/price/priceCreate',
+      name: '报价单添加',
+      component: () => import('../views/price/priceCreate.vue')
+    }, {
+      path: '/price/priceUpdate/:id',
+      name: '报价单修改',
+      component: () => import('../views/price/priceUpdate.vue')
+    }, {
+      path: '/price/priceGiveAgain/:id',
+      name: '再次报价',
+      component: () => import('../views/price/priceGiveAgain.vue')
+    }, {
+      path: '/price/priceList/:params',
+      name: '报价单列表',
+      component: () => import('../views/price/priceList.vue')
+    }, {
+      path: '/price/priceDetail/:id',
+      name: '报价单详情',
+      component: () => import('../views/price/priceDetail.vue')
+    }]
   }
 ]
 const router = new Router({

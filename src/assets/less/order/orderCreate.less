@@ -125,6 +125,58 @@
       }
     }
   }
+  .priceCtn{
+    padding: 20px 32px 0 32px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    &.hasBorderTop{
+      border-top: 1px solid #E9E9E9;
+    }
+    .once{
+      flex: 1;
+      border-right: 1px solid #E9E9E9;
+      margin-right: 24px;
+      display: flex;
+      flex-direction: column;
+      .label{
+        font-size: @fontMiddle;
+        color: @font85;
+        line-height: 32px;
+      }
+      .number{
+        font-size: 30px;
+        color: @font85;
+      }
+      .desc{
+        font-size: @fontSmall;
+        color: @font45;
+        line-height: 32px;
+        .green{
+          color: @green;
+        }
+        .red{
+          color: @red;
+        }
+      }
+      &:nth-last-child(1){
+        border-right: 0;
+        margin-right: 0;
+      }
+    }
+  }
+  .green{
+    color: @green;
+  }
+  .red{
+    color: @red;
+  }
+  .orange{
+    color: @orange;
+  }
+  .blue{
+    color: @blue;
+  }
   .rightBtn{
     float: right;
     height: 33px;

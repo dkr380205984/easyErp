@@ -64,7 +64,7 @@ export default {
         if (res.data.code === 200) {
           window.sessionStorage.setItem('token', res.data.data.access_token)
           window.sessionStorage.setItem('token_type', res.data.data.token_type)
-          getAuthorization().then((res) => {
+          getAuthorization.get().then((res) => {
             this.$message.success({
               message: '登录成功',
               duration: 1000

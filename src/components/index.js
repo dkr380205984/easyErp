@@ -2,6 +2,7 @@ import zhInput from './zhInput/zhInput.vue'
 import zhNav from './zhNav/zhNav.vue'
 import zhImgList from './zhImgList/zhImgList.vue'
 import zhMessage from './zhMessage/zhMessage.vue'
+import zhDeduct from './zhDeduct/zhDeduct.vue'
 // import zhCard from './zhCard/zhCard.vue'
 // import zhCardPosition from './zhCardPosition/zhCardPosition.vue'
 // import colorPicker from './colorPicker/colorPicker.vue'
@@ -15,6 +16,7 @@ export default {
     vue.component('zhNav', zhNav)
     vue.component('zhImgList', zhImgList)
     vue.component('zhMessage', zhMessage)
+    vue.component('zhDeduct', zhDeduct)
     // vue.component('zhCard', zhCard)
     // vue.component('zhCardPosition', zhCardPosition)
     // vue.component('colorPicker', colorPicker)

@@ -1,0 +1,41 @@
+@import '../common.less';
+#priceCreate{
+  .samllInput{
+    display: flex;
+    .hasMarginLeft{
+      margin-left: 72px;
+    }
+  }
+  .more_btn{
+    margin-right: 144px;
+    .editBtn{
+      display: flex;
+      align-items: center;
+      .blue{
+        color:@blue;
+      }
+      .red{
+        color: @red;
+      }
+      &>span:nth-child(n+2){
+        margin-left: 16px;
+      }
+    }
+  }
+  .priceCtn{
+    float: left;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    .content{
+      &.marginLeft{
+        margin-left: 32px;
+      }
+     .price{
+        font-size: 24px;
+        color: @blue;
+        font-weight: bold;
+      } 
+    }
+  }
+}

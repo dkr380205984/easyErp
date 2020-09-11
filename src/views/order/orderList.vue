@@ -2,17 +2,6 @@
   <div id='orderList'
     class='indexMain'
     v-loading='loading'>
-    <div class="listCutCtn">
-      <div class="cut_item active">
-        <span class="icon order"></span>
-        <span class="name">订单列表</span>
-      </div>
-      <div class="cut_item"
-        @click="$router.push('/product/productList/page=1&&keyword=&&date=&&category_id=&&type_id=&&style_id=&&flower_id=&&user_id=&&has_plan=&&has_craft=&&has_quotation=')">
-        <span class="icon product"></span>
-        <span class="name">产品列表</span>
-      </div>
-    </div>
     <div class="chartsCtn">
       <div class="charts">
         <div class="title">
@@ -236,7 +225,7 @@
         </div>
         <div class="addCtn">
           <div class="btn btnBlue"
-            @click="$router.push('/order/orderCreate')">新建订单</div>
+            @click="$router.push('/order/orderCreate/noId')">新建订单</div>
         </div>
         <div class="list">
           <div class="title">
@@ -254,9 +243,6 @@
             </div>
             <div class="col flex08">
               <span class="text">负责小组</span>
-            </div>
-            <div class="col flex16">
-              <span class="text">流程进度</span>
             </div>
             <div class="col">
               <span class="text">订单状态</span>
@@ -283,43 +269,6 @@
             <div class="col flex08">
               {{itemOrder.group_name}}
             </div>
-            <div class="col flex16">
-              <div class="stateCtn"
-                :class="{'green':itemOrder.has_plan>0}">
-                <div class="state"></div>
-                <span class="name">计</span>
-              </div>
-              <div class="stateCtn"
-                :class="{'orange':itemOrder.material_order_progress.y_percent>0,'green':itemOrder.material_order_progress.y_percent>=100}">
-                <div class="state"></div>
-                <span class="name">订</span>
-              </div>
-              <div class="stateCtn"
-                :class="{'orange':itemOrder.material_push_progress.r_push>0,'green':itemOrder.material_push_progress.r_push>=100}">
-                <div class="state"></div>
-                <span class="name">库</span>
-              </div>
-              <div class="stateCtn"
-                :class="{'orange':itemOrder.product_weave_progress.product>0,'green':itemOrder.product_weave_progress.product>=100}">
-                <div class="state"></div>
-                <span class="name">织</span>
-              </div>
-              <div class="stateCtn"
-                :class="{'orange':itemOrder.product_push_progress>0,'green':itemOrder.product_push_progress>=100}">
-                <div class="state"></div>
-                <span class="name">收</span>
-              </div>
-              <div class="stateCtn"
-                :class="{'orange':itemOrder.product_inspection_progress.r_product>0,'green':itemOrder.product_inspection_progress.r_product>=100}">
-                <div class="state"></div>
-                <span class="name">检</span>
-              </div>
-              <div class="stateCtn"
-                :class="{'orange':itemOrder.pack_real_progress>0,'green':itemOrder.pack_real_progress>=100}">
-                <div class="state"></div>
-                <span class="name">箱</span>
-              </div>
-            </div>
             <div class="col">
               <div class="stateCtn rowFlex"
                 :class="{'red':itemOrder.status === 2003 || itemOrder.status === 2005,'green':itemOrder.status === 2004,'blue':itemOrder.status === 2002,'orange':itemOrder.status === 2001}">
@@ -332,21 +281,10 @@
             </div>
             <div class="col">
               <span class="opr"
-                @click="$router.push('/order/orderDetail/' + itemOrder.id)">详情</span>
-              <span class="opr">
-                <el-dropdown @command="handleCommand($event,itemOrder.id)">
-                  <span class="el-dropdown-link">
-                    操作<i class="el-icon-arrow-down el-icon--right"></i>
-                  </span>
-                  <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item command='change'>
-                      <span class="updated">修改</span>
-                    </el-dropdown-item>
-                    <el-dropdown-item command='delete'>
-                      <span class="delete">删除</span>
-                    </el-dropdown-item>
-                  </el-dropdown-menu>
-                </el-dropdown>
+                @click="$router.push('/order/orderCreate/' + itemOrder.id)">详情</span>
+              <span class="opr red"
+                @click="deleteOrder(itemOrder.id)">
+                删除
               </span>
             </div>
           </div>
@@ -604,61 +542,61 @@ export default {
         status_product_push: this.has_productInOut,
         status_product_inspection: this.has_inspection,
         status_stock_out: this.has_boxing
-      }).then(res => {
+      }).then((res) => {
         this.list = res.data.data.map(item => {
-          item.image = this.$mergeData(item.product_info, { mainRule: ['product_code', 'product_id'], otherRule: [{ name: 'numbers', type: 'add' }, { name: 'image' }] }).map(item => {
-            return item.image.length > 0 ? item.image.map(itemImg => {
-              return {
-                ...itemImg,
+          if (item.product_info.length > 0) {
+            item.image = this.$mergeData(item.product_info, { mainRule: ['product_code', 'product_id'], otherRule: [{ name: 'numbers', type: 'add' }, { name: 'image' }] }).map(item => {
+              return item.image.length > 0 ? item.image.map(itemImg => {
+                return {
+                  ...itemImg,
+                  product_id: item.product_id
+                }
+              }) : [{
+                image_url: '',
+                thumb: '',
                 product_id: item.product_id
-              }
-            }) : [{
-              image_url: '',
-              thumb: '',
-              product_id: item.product_id
-            }]
-          }).reduce((total, item) => {
-            return total.concat(item)
-          })
-          item.number = item.product_info.map(itemPro => itemPro.numbers).reduce((total, itemNum) => {
-            return Number(total) + Number(itemNum)
-          })
+              }]
+            }).reduce((total, item) => {
+              return total.concat(item)
+            })
+            item.number = item.product_info.map(itemPro => itemPro.numbers).reduce((total, itemNum) => {
+              return Number(total) + Number(itemNum)
+            })
+          } else {
+            item.image = []
+            item.number = 0
+          }
+
           return item
         })
         this.total = res.data.meta.total
         this.loading = false
       })
     },
-    handleCommand (type, id) {
-      if (type === 'change') {
-        this.$router.push('/order/orderUpdate/' + id)
-      } else if (type === 'delete') {
-        this.$confirm('此操作将永久删除该订单, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          order.delete({
-            id: id
-          }).then(res => {
-            if (res.data.status) {
-              this.$message.success('删除成功')
-              setTimeout(() => {
-                window.location.reload()
-              }, 300)
-            } else {
-              this.$message.error(res.data.message)
-            }
-          })
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除'
-          })
+    deleteOrder (id) {
+      this.$confirm('此操作将永久删除该订单, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        order.delete({
+          id: id
+        }).then(res => {
+          if (res.data.status) {
+            this.$message.success('删除成功')
+            setTimeout(() => {
+              window.location.reload()
+            }, 300)
+          } else {
+            this.$message.error(res.data.message)
+          }
         })
-      } else if (type === 'materialStock') {
-        this.$router.push('/materialStock/materialStockDetail/' + id + '/1')
-      }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     },
     createMonthDay () {
       let daysOfMonth = []
@@ -690,7 +628,6 @@ export default {
     }
     todayLess14 = todayLess14.reverse()
     chartsAPI.order().then((res) => {
-      console.log(res)
       let data = res.data.data
       this.processData.xAxis.data = todayMore14
       todayMore14.forEach((item) => {
